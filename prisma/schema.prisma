@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Link {
+  shortCode   String   @id @unique
+  originalUrl String
+  createdAt   DateTime @default(dbgenerated("(NOW() + '3 years'::interval)"))
+
+  @@map("links")
+}

@@ -1,0 +1,62 @@
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { CreateLinkDTO } from './dto/create-link.dto';
+import Redis from 'ioredis';
+import { PrismaService } from 'src/prisma/prisma.service';
+
+const CHARSET =
+  '6plCWYq0iuerzvwEDQ5yGS7LJ2QA3VIXbfHP8RgaNmcd4knhoMxBj9st1TUZFO ';
+
+@Injectable()
+export class LinksService {
+  constructor(
+    @Inject('REDIS_CLIENT') private readonly redis: Redis,
+    private readonly prisma: PrismaService,
+  ) {}
+
+  async create(dto: CreateLinkDTO): Promise<string> {
+    const id = await this.redis.incr('url_id_counter');
+
+    const shortCode = this.generateShortCode(id);
+
+    await this.prisma.link.create({
+      data: {
+        shortCode,
+        originalUrl: dto.originalUrl,
+      },
+    });
+
+    return shortCode;
+  }
+
+  async findOriginalLink(shortCode: string) {
+    const original = await this.prisma.link.findUnique({
+      where: {
+        shortCode,
+      },
+      select: {
+        originalUrl: true,
+      },
+    });
+
+    if (!original) {
+      throw new NotFoundException('Link não encontrado');
+    }
+
+    return original.originalUrl;
+  }
+
+  private generateShortCode(id: number | bigint): string {
+    let n = BigInt(id);
+    if (n === 0n) {
+      return CHARSET[0];
+    }
+
+    let shortCode = '';
+    while (n > 0n) {
+      shortCode = CHARSET[Number(n % 62n)] + shortCode;
+      n = n / 62n;
+    }
+
+    return shortCode;
+  }
+}
