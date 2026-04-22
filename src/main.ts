@@ -14,8 +14,14 @@ async function bootstrap() {
       transform: true,
     }),
   );
+  const originString = process.env.ORIGIN || '';
+
+  const originsArray = originString.split(',').map((item) => item.trim());
+
   app.enableCors({
-    origin: [process.env.ORIGIN],
+    origin: originsArray,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
   });
   app.use(helmet());
 
