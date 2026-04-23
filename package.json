@@ -1,10 +1,10 @@
 {
-  "name": "encuretei-api-prod",
-  "version": "0.0.1",
+  "name": "encurtei-api-prod",
+  "version": "1.0.0",
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

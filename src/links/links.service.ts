@@ -1,10 +1,15 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateLinkDTO } from './dto/create-link.dto';
 import Redis from 'ioredis';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 const CHARSET =
-  '6plCWYq0iuerzvwEDQ5yGS7LJ2QA3VIXbfHP8RgaNmcd4knhoMxBj9st1TUZFO ';
+  '6plCWYq0iuerzvwEDQ5yGS7LJ2KA3VIXbfHP8RgaNmcd4knhoMxBj9st1TUZFO-.';
 
 @Injectable()
 export class LinksService {
@@ -14,18 +19,41 @@ export class LinksService {
   ) {}
 
   async create(dto: CreateLinkDTO): Promise<string> {
-    const id = await this.redis.incr('url_id_counter');
+    if (dto.path) {
+      const exists = await this.prisma.link.findUnique({
+        where: { shortCode: dto.path },
+      });
+      if (exists) {
+        throw new ConflictException('Esse caminho já está em uso!');
+      }
 
-    const shortCode = this.generateShortCode(id);
+      await this.prisma.link.create({
+        data: {
+          shortCode: dto.path,
+          originalUrl: dto.originalUrl,
+        },
+      });
 
-    await this.prisma.link.create({
-      data: {
-        shortCode,
-        originalUrl: dto.originalUrl,
-      },
-    });
+      return dto.path;
+    }
 
-    return shortCode;
+    while (true) {
+      const id = await this.redis.incr('url_id_counter');
+      const shortCode = this.generateShortCode(id);
+
+      try {
+        await this.prisma.link.create({
+          data: {
+            shortCode,
+            originalUrl: dto.originalUrl,
+          },
+        });
+
+        return shortCode;
+
+        // eslint-disable-next-line no-empty
+      } catch {}
+    }
   }
 
   async findOriginalLink(shortCode: string) {
@@ -53,8 +81,8 @@ export class LinksService {
 
     let shortCode = '';
     while (n > 0n) {
-      shortCode = CHARSET[Number(n % 62n)] + shortCode;
-      n = n / 62n;
+      shortCode = CHARSET[Number(n % 64n)] + shortCode;
+      n = n / 64n;
     }
 
     return shortCode;
