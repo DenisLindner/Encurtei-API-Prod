@@ -27,19 +27,19 @@ export type AggregateLink = {
 export type LinkMinAggregateOutputType = {
   shortCode: string | null
   originalUrl: string | null
-  createdAt: Date | null
+  expireAt: Date | null
 }
 
 export type LinkMaxAggregateOutputType = {
   shortCode: string | null
   originalUrl: string | null
-  createdAt: Date | null
+  expireAt: Date | null
 }
 
 export type LinkCountAggregateOutputType = {
   shortCode: number
   originalUrl: number
-  createdAt: number
+  expireAt: number
   _all: number
 }
 
@@ -47,19 +47,19 @@ export type LinkCountAggregateOutputType = {
 export type LinkMinAggregateInputType = {
   shortCode?: true
   originalUrl?: true
-  createdAt?: true
+  expireAt?: true
 }
 
 export type LinkMaxAggregateInputType = {
   shortCode?: true
   originalUrl?: true
-  createdAt?: true
+  expireAt?: true
 }
 
 export type LinkCountAggregateInputType = {
   shortCode?: true
   originalUrl?: true
-  createdAt?: true
+  expireAt?: true
   _all?: true
 }
 
@@ -138,7 +138,7 @@ export type LinkGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type LinkGroupByOutputType = {
   shortCode: string
   originalUrl: string
-  createdAt: Date
+  expireAt: Date
   _count: LinkCountAggregateOutputType | null
   _min: LinkMinAggregateOutputType | null
   _max: LinkMaxAggregateOutputType | null
@@ -165,13 +165,13 @@ export type LinkWhereInput = {
   NOT?: Prisma.LinkWhereInput | Prisma.LinkWhereInput[]
   shortCode?: Prisma.StringFilter<"Link"> | string
   originalUrl?: Prisma.StringFilter<"Link"> | string
-  createdAt?: Prisma.DateTimeFilter<"Link"> | Date | string
+  expireAt?: Prisma.DateTimeFilter<"Link"> | Date | string
 }
 
 export type LinkOrderByWithRelationInput = {
   shortCode?: Prisma.SortOrder
   originalUrl?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  expireAt?: Prisma.SortOrder
 }
 
 export type LinkWhereUniqueInput = Prisma.AtLeast<{
@@ -180,13 +180,13 @@ export type LinkWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.LinkWhereInput[]
   NOT?: Prisma.LinkWhereInput | Prisma.LinkWhereInput[]
   originalUrl?: Prisma.StringFilter<"Link"> | string
-  createdAt?: Prisma.DateTimeFilter<"Link"> | Date | string
+  expireAt?: Prisma.DateTimeFilter<"Link"> | Date | string
 }, "shortCode" | "shortCode">
 
 export type LinkOrderByWithAggregationInput = {
   shortCode?: Prisma.SortOrder
   originalUrl?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  expireAt?: Prisma.SortOrder
   _count?: Prisma.LinkCountOrderByAggregateInput
   _max?: Prisma.LinkMaxOrderByAggregateInput
   _min?: Prisma.LinkMinOrderByAggregateInput
@@ -198,67 +198,67 @@ export type LinkScalarWhereWithAggregatesInput = {
   NOT?: Prisma.LinkScalarWhereWithAggregatesInput | Prisma.LinkScalarWhereWithAggregatesInput[]
   shortCode?: Prisma.StringWithAggregatesFilter<"Link"> | string
   originalUrl?: Prisma.StringWithAggregatesFilter<"Link"> | string
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Link"> | Date | string
+  expireAt?: Prisma.DateTimeWithAggregatesFilter<"Link"> | Date | string
 }
 
 export type LinkCreateInput = {
   shortCode: string
   originalUrl: string
-  createdAt?: Date | string
+  expireAt?: Date | string
 }
 
 export type LinkUncheckedCreateInput = {
   shortCode: string
   originalUrl: string
-  createdAt?: Date | string
+  expireAt?: Date | string
 }
 
 export type LinkUpdateInput = {
   shortCode?: Prisma.StringFieldUpdateOperationsInput | string
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expireAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LinkUncheckedUpdateInput = {
   shortCode?: Prisma.StringFieldUpdateOperationsInput | string
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expireAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LinkCreateManyInput = {
   shortCode: string
   originalUrl: string
-  createdAt?: Date | string
+  expireAt?: Date | string
 }
 
 export type LinkUpdateManyMutationInput = {
   shortCode?: Prisma.StringFieldUpdateOperationsInput | string
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expireAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LinkUncheckedUpdateManyInput = {
   shortCode?: Prisma.StringFieldUpdateOperationsInput | string
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expireAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LinkCountOrderByAggregateInput = {
   shortCode?: Prisma.SortOrder
   originalUrl?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  expireAt?: Prisma.SortOrder
 }
 
 export type LinkMaxOrderByAggregateInput = {
   shortCode?: Prisma.SortOrder
   originalUrl?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  expireAt?: Prisma.SortOrder
 }
 
 export type LinkMinOrderByAggregateInput = {
   shortCode?: Prisma.SortOrder
   originalUrl?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  expireAt?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -274,28 +274,28 @@ export type DateTimeFieldUpdateOperationsInput = {
 export type LinkSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   shortCode?: boolean
   originalUrl?: boolean
-  createdAt?: boolean
+  expireAt?: boolean
 }, ExtArgs["result"]["link"]>
 
 export type LinkSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   shortCode?: boolean
   originalUrl?: boolean
-  createdAt?: boolean
+  expireAt?: boolean
 }, ExtArgs["result"]["link"]>
 
 export type LinkSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   shortCode?: boolean
   originalUrl?: boolean
-  createdAt?: boolean
+  expireAt?: boolean
 }, ExtArgs["result"]["link"]>
 
 export type LinkSelectScalar = {
   shortCode?: boolean
   originalUrl?: boolean
-  createdAt?: boolean
+  expireAt?: boolean
 }
 
-export type LinkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"shortCode" | "originalUrl" | "createdAt", ExtArgs["result"]["link"]>
+export type LinkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"shortCode" | "originalUrl" | "expireAt", ExtArgs["result"]["link"]>
 
 export type $LinkPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Link"
@@ -303,7 +303,7 @@ export type $LinkPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     shortCode: string
     originalUrl: string
-    createdAt: Date
+    expireAt: Date
   }, ExtArgs["result"]["link"]>
   composites: {}
 }
@@ -729,7 +729,7 @@ export interface Prisma__LinkClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface LinkFieldRefs {
   readonly shortCode: Prisma.FieldRef<"Link", 'String'>
   readonly originalUrl: Prisma.FieldRef<"Link", 'String'>
-  readonly createdAt: Prisma.FieldRef<"Link", 'DateTime'>
+  readonly expireAt: Prisma.FieldRef<"Link", 'DateTime'>
 }
     
 

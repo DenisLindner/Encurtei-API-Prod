@@ -11,7 +11,7 @@ datasource db {
 model Link {
   shortCode   String   @id @unique
   originalUrl String
-  createdAt   DateTime @default(dbgenerated("(NOW() + '3 years'::interval)"))
+  expireAt   DateTime @default(dbgenerated("(NOW() + '3 years'::interval)"))
 
   @@map("links")
 }

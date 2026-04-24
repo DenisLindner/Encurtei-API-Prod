@@ -7,6 +7,7 @@ import {
 import { CreateLinkDTO } from './dto/create-link.dto';
 import Redis from 'ioredis';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Cron } from '@nestjs/schedule';
 
 const CHARSET =
   '6plCWYq0iuerzvwEDQ5yGS7LJ2KA3VIXbfHP8RgaNmcd4knhoMxBj9st1TUZFO-.';
@@ -86,5 +87,17 @@ export class LinksService {
     }
 
     return shortCode;
+  }
+
+  @Cron('0 30 23 * * 7', { timeZone: 'America/Sao_Paulo' })
+  async deleteSchedule() {
+    await this.deleteExpireLinks();
+  }
+
+  private async deleteExpireLinks() {
+    const now = new Date();
+    await this.prisma.link.deleteMany({
+      where: { expireAt: { lt: now } },
+    });
   }
 }

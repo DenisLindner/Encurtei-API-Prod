@@ -73,7 +73,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const LinkScalarFieldEnum = {
   shortCode: 'shortCode',
   originalUrl: 'originalUrl',
-  createdAt: 'createdAt'
+  expireAt: 'expireAt'
 } as const
 
 export type LinkScalarFieldEnum = (typeof LinkScalarFieldEnum)[keyof typeof LinkScalarFieldEnum]
