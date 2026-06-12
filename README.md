@@ -146,7 +146,13 @@ cp .env.example .env
 docker compose up -d --build
 ```
 
-4. **Acesse a API:**
+4. **Execute as migrations do Prisma:**
+
+```bash
+docker compose exec api npx prisma migrate deploy
+```
+
+5. **Acesse a API:**
 
 ```bash
 http://localhost:3333
@@ -159,6 +165,7 @@ Caso prefira rodar a aplicação fora do container, mantenha PostgreSQL e Redis 
 ```bash
 npm install
 npx prisma generate
+npx prisma migrate deploy
 npm run start:dev
 ```
 
