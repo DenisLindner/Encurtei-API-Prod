@@ -9,7 +9,7 @@ datasource db {
 }
 
 model Link {
-  shortCode   String   @id @unique
+  shortCode   String   @id
   originalUrl String
   expireAt   DateTime @default(dbgenerated("(NOW() + '3 years'::interval)"))
 
