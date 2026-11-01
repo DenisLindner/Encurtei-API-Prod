@@ -13,7 +13,7 @@ import { ScheduleModule } from '@nestjs/schedule';
       throttlers: [
         {
           ttl: 60000,
-          limit: 10,
+          limit: Number(process.env.THROTTLE_LIMIT ?? 120),
         },
       ],
     }),

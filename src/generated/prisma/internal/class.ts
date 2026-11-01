@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.7.0",
   "engineVersion": "75cbdc1eb7150937890ad5465d861175c6624711",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider     = \"prisma-client\"\n  output       = \"../src/generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Link {\n  shortCode   String   @id @unique\n  originalUrl String\n  expireAt    DateTime @default(dbgenerated(\"(NOW() + '3 years'::interval)\"))\n\n  @@map(\"links\")\n}\n",
+  "inlineSchema": "generator client {\n  provider     = \"prisma-client\"\n  output       = \"../src/generated/prisma\"\n  moduleFormat = \"cjs\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Link {\n  shortCode   String   @id\n  originalUrl String\n  expireAt    DateTime @default(dbgenerated(\"(NOW() + '3 years'::interval)\"))\n\n  @@map(\"links\")\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},

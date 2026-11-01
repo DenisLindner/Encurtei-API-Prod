@@ -181,7 +181,7 @@ export type LinkWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LinkWhereInput | Prisma.LinkWhereInput[]
   originalUrl?: Prisma.StringFilter<"Link"> | string
   expireAt?: Prisma.DateTimeFilter<"Link"> | Date | string
-}, "shortCode" | "shortCode">
+}, "shortCode">
 
 export type LinkOrderByWithAggregationInput = {
   shortCode?: Prisma.SortOrder

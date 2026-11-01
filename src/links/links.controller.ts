@@ -8,7 +8,7 @@ export class LinksController {
   constructor(private readonly service: LinksService) {}
 
   @Post()
-  @Throttle({ default: { ttl: 60000, limit: 4 } })
+  @Throttle({ default: { ttl: 60000, limit: 10 } })
   async createLink(@Body() dto: CreateLinkDTO) {
     const shortCode = await this.service.create(dto);
     return { shortUrl: shortCode };
