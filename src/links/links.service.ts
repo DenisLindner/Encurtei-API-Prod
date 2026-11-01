@@ -13,7 +13,7 @@ import { Cron } from '@nestjs/schedule';
 const CHARSET =
   '6plCWYq0iuerzvwEDQ5yGS7LJ2KA3VIXbfHP8RgaNmcd4knhoMxBj9st1TUZFO-.';
 
-const MAX_CREATE_ATTEMPTS = 3;
+const MAX_CREATE_ATTEMPTS = 10;
 const CACHE_PREFIX = 'link:';
 const CACHE_TTL_SECONDS = 60 * 60 * 24;
 const NOT_FOUND_TTL_SECONDS = 60;
